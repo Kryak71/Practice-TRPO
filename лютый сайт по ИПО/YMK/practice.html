@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практический раздел - УМК по ИПО</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Цветовая палитра Python: синий (#306998) и желтый (#FFD43B) */
+        :root {
+            --python-blue: #306998;
+            --python-blue-dark: #25567c;
+            --python-yellow: #FFD43B;
+            --python-yellow-dark: #e6bf35;
+            --python-light: #f0f8ff;
+            --python-gray: #5f6368;
+            --python-light-gray: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--python-light) 0%, #ffffff 100%);
+            color: #202124;
+            min-height: 100vh;
+        }
+        
+        /* Шапка сайта */
+        .site-header {
+            background: linear-gradient(to right, var(--python-blue), var(--python-blue-dark));
+            padding: 15px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(48, 105, 152, 0.2);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            color: var(--python-yellow);
+            font-size: 28px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px;
+            border-radius: 8px;
+        }
+        
+        .site-name {
+            font-size: 24px;
+            font-weight: 500;
+            color: white;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Место для фото справа */
+        .header-photo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .institute-photo {
+            height: 50px;
+            width: auto;
+            border-radius: 4px;
+            transition: transform 0.3s;
+            object-fit: contain;
+            background-color: white;
+            padding: 2px;
+        }
+        
+        .institute-photo:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Навигационная панель */
+        .nav-container {
+            background: white;
+            border-bottom: 3px solid var(--python-yellow);
+            padding: 0 24px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .nav-tabs {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-tab {
+            padding: 18px 24px;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #000000;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .nav-tab:hover {
+            background-color: rgba(255, 212, 59, 0.1);
+            color: #000000;
+        }
+        
+        .nav-tab.active {
+            color: #000000;
+            border-bottom-color: var(--python-yellow);
+            background-color: transparent;
+            font-weight: 600;
+        }
+        
+        /* Основной контент */
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+        
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(48, 105, 152, 0.1);
+            border-top: 5px solid var(--python-blue);
+            margin-bottom: 30px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--python-yellow);
+        }
+        
+        .section-icon {
+            background: var(--python-yellow);
+            color: var(--python-blue);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 24px;
+        }
+        
+        .section-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--python-blue);
+            margin: 0;
+        }
+        
+        /* Описание раздела */
+        .section-description {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--python-gray);
+            margin-bottom: 40px;
+            max-width: 800px;
+        }
+        
+        /* Категории задач */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .category-card {
+            background: linear-gradient(135deg, var(--python-light), #ffffff);
+            border-radius: 12px;
+            padding: 30px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .category-card:hover {
+            border-color: var(--python-yellow);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(48, 105, 152, 0.15);
+        }
+        
+        .category-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--python-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 30px;
+        }
+        
+        .category-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--python-blue);
+            margin-bottom: 15px;
+        }
+        
+        .category-description {
+            color: var(--python-gray);
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        
+        /* Статистика категорий */
+        .category-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(48, 105, 152, 0.1);
+        }
+        
+        .category-stat {
+            text-align: center;
+        }
+        
+        .category-stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--python-blue);
+        }
+        
+        .category-stat-label {
+            font-size: 12px;
+            color: var(--python-gray);
+            margin-top: 5px;
+        }
+        
+        /* Задачи */
+        .tasks-section {
+            margin-top: 50px;
+        }
+        
+        .tasks-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .tasks-title {
+            font-size: 26px;
+            font-weight: 600;
+            color: var(--python-blue);
+        }
+        
+        .difficulty-filter {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .difficulty-btn {
+            padding: 8px 16px;
+            background: var(--python-light);
+            border: 2px solid transparent;
+            border-radius: 20px;
+            color: var(--python-gray);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .difficulty-btn.active {
+            background: var(--python-blue);
+            color: white;
+            border-color: var(--python-blue);
+        }
+        
+        .difficulty-btn:hover:not(.active) {
+            border-color: var(--python-yellow);
+        }
+        
+        .tasks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .task-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .task-card:hover {
+            border-color: var(--python-yellow);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(48, 105, 152, 0.1);
+        }
+        
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .task-number {
+            color: var(--python-blue);
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        .task-difficulty {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .difficulty-easy {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+        
+        .difficulty-medium {
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+        }
+        
+        .difficulty-hard {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+        
+        .task-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--python-blue);
+            margin-bottom: 12px;
+        }
+        
+        .task-description {
+            color: var(--python-gray);
+            line-height: 1.5;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+        
+        .task-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .task-tag {
+            background: var(--python-light);
+            color: var(--python-blue);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .task-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .view-btn {
+            background: var(--python-blue);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .view-btn:hover {
+            background: var(--python-blue-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(48, 105, 152, 0.3);
+        }
+        
+        .task-points {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--python-yellow);
+            font-weight: 600;
+        }
+        
+        /* Стили для карточек материалов */
+        .material-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .material-card:hover {
+            border-color: var(--python-yellow);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(48, 105, 152, 0.15);
+        }
+        
+        .pdf-btn {
+            background: var(--python-blue);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+        }
+        
+        .pdf-btn:hover {
+            background: var(--python-blue-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(48, 105, 152, 0.3);
+        }
+        
+        .view-pdf-btn {
+            background: var(--python-yellow);
+            color: var(--python-blue);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+        }
+        
+        .view-pdf-btn:hover {
+            background: var(--python-yellow-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 212, 59, 0.3);
+        }
+        
+        /* Модальное окно для просмотра задачи */
+        .task-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 700px;
+            border-radius: 12px;
+            overflow: hidden;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .modal-header {
+            background: var(--python-blue);
+            color: white;
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .modal-body {
+            padding: 30px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .modal-task-number {
+            color: var(--python-blue);
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .modal-task-description {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--python-gray);
+            margin-bottom: 25px;
+            padding: 15px;
+            background: var(--python-light);
+            border-radius: 8px;
+            border-left: 4px solid var(--python-yellow);
+        }
+        
+        .modal-task-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+        
+        .modal-detail-card {
+            background: var(--python-light);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .detail-label {
+            font-size: 14px;
+            color: var(--python-gray);
+            margin-bottom: 8px;
+        }
+        
+        .detail-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--python-blue);
+        }
+        
+        /* Сообщение "нет задач" */
+        .no-tasks {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 40px;
+            color: var(--python-gray);
+            background: var(--python-light);
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        
+        .no-tasks i {
+            font-size: 48px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        
+        .no-tasks h3 {
+            margin-bottom: 10px;
+            color: var(--python-blue);
+        }
+        
+        /* Футер */
+        .site-footer {
+            background: linear-gradient(to right, var(--python-blue), var(--python-blue-dark));
+            color: white;
+            padding: 30px 24px;
+            margin-top: 60px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .python-snake {
+            font-size: 14px;
+            color: var(--python-yellow);
+            margin-top: 10px;
+            font-family: monospace;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .tasks-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .materials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .site-header, .nav-container {
+                padding: 12px 16px;
+            }
+            
+            .main-content {
+                padding: 0 16px;
+                margin: 20px auto;
+            }
+            
+            .content-card {
+                padding: 25px 20px;
+            }
+            
+            .nav-tab {
+                padding: 14px 16px;
+                font-size: 13px;
+            }
+            
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .site-name {
+                font-size: 20px;
+            }
+            
+            .institute-photo {
+                height: 40px;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .section-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tasks-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .materials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tasks-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .difficulty-filter {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .institute-photo {
+                height: 35px;
+            }
+            
+            .task-footer {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .view-btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .modal-task-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .material-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .pdf-btn, .view-pdf-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="site-header">
+        <div class="logo">
+            <i class="fab fa-python logo-icon"></i>
+            <span class="site-name">УМК по ИПО</span>
+        </div>
+        
+        <!-- Место для вашего фото -->
+        <div class="header-photo">
+            <img src="GGPK.png" 
+                 alt="Герб или логотип института" 
+                 class="institute-photo"
+                 onerror="this.style.display='none'">
+        </div>
+    </header>
+    
+    <!-- Навигационная панель -->
+    <nav class="nav-container">
+        <ul class="nav-tabs">
+            <li class="nav-tab" onclick="window.location.href='index.html'">ГЛАВНАЯ</li>
+            <li class="nav-tab" onclick="window.location.href='theory.html'">ТЕОРЕТИЧЕСКИЙ РАЗДЕЛ</li>
+            <li class="nav-tab active">ПРАКТИЧЕСКИЙ РАЗДЕЛ</li>
+            <li class="nav-tab" onclick="window.location.href='materials.html'">ДОПОЛНИТЕЛЬНЫЕ МАТЕРИАЛЫ</li>
+        </ul>
+    </nav>
+    
+    <!-- Основной контент -->
+    <main class="main-content">
+        <div class="content-card">
+            <!-- Заголовок раздела -->
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h1 class="section-title">Практический раздел</h1>
+            </div>
+            
+            <!-- Описание раздела -->
+            <div class="section-description">
+                <p>Здесь вы можете изучить практические задачи по Python разной сложности. Выберите категорию и задачу, чтобы просмотреть ее условие и требования.</p>
+            </div>
+            
+            <!-- Категории задач -->
+            <div class="categories-grid">
+                <!-- Основы Python -->
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="category-title">Основы Python</h3>
+                    <p class="category-description">Задачи на базовые конструкции языка: переменные, типы данных, операторы, условные операторы, циклы.</p>
+                    <div class="category-stats">
+                        <div class="category-stat">
+                            <div class="category-stat-number" id="basics-count">5</div>
+                            <div class="category-stat-label">задач</div>
+                        </div>
+                        <div class="category-stat">
+                            <div class="category-stat-number" id="basics-points">21</div>
+                            <div class="category-stat-label">баллов</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Структуры данных -->
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3 class="category-title">Структуры данных</h3>
+                    <p class="category-description">Работа со списками, словарями, кортежами, множествами. Задачи на манипуляции с данными.</p>
+                    <div class="category-stats">
+                        <div class="category-stat">
+                            <div class="category-stat-number" id="data-structures-count">3</div>
+                            <div class="category-stat-label">задач</div>
+                        </div>
+                        <div class="category-stat">
+                            <div class="category-stat-number" id="data-structures-points">17</div>
+                            <div class="category-stat-label">баллов</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Алгоритмы -->
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="category-title">Алгоритмы</h3>
+                    <p class="category-description">Классические алгоритмические задачи: сортировка, поиск, рекурсия, динамическое программирование.</p>
+                    <div class="category-stats">
+                        <div class="category-stat">
+                            <div class="category-stat-number" id="algorithms-count">4</div>
+                            <div class="category-stat-label">задач</div>
+                        </div>
+                        <div class="category-stat">
+                            <div class="category-stat-number" id="algorithms-points">31</div>
+                            <div class="category-stat-label">баллов</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Секция с задачами -->
+            <div class="tasks-section">
+                <div class="tasks-header">
+                    <h2 class="tasks-title">Задачи для изучения</h2>
+                    <div class="difficulty-filter">
+                        <button class="difficulty-btn active" onclick="filterTasks('all')">Все</button>
+                        <button class="difficulty-btn" onclick="filterTasks('easy')">Легкие</button>
+                        <button class="difficulty-btn" onclick="filterTasks('medium')">Средние</button>
+                        <button class="difficulty-btn" onclick="filterTasks('hard')">Сложные</button>
+                    </div>
+                </div>
+                
+                <div class="tasks-grid" id="tasks-container">
+                    <!-- Задачи будут загружены через JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Скачивание материалов -->
+            <div class="materials-section" style="margin-top: 80px; padding-top: 40px; border-top: 3px solid var(--python-yellow);">
+                <div class="section-header" style="margin-bottom: 40px;">
+                    <div class="section-icon" style="background: var(--python-blue);">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h1 class="section-title">Материалы для скачивания</h1>
+                </div>
+
+ <!-- Лабораторные работы -->
+<div class="materials-category" style="margin-bottom: 60px;">
+    <h2 style="color: var(--python-blue); font-size: 28px; margin-bottom: 30px; padding-bottom: 10px; border-bottom: 2px solid var(--python-yellow);">
+        <i class="fas fa-flask" style="margin-right: 10px;"></i>
+        Лабораторные работы
+    </h2>
+    
+    <div class="materials-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 25px;">
+        <!-- ЛР1 -->
+        <div class="material-card">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="width: 50px; height: 50px; background: var(--python-blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 20px;">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <div>
+                    <h3 style="color: var(--python-blue); margin: 0; font-size: 18px;">Лабораторная работа 1</h3>
+                    <p style="color: var(--python-gray); font-size: 14px; margin: 5px 0 0 0;">PDF • 0.8 MB</p>
+                </div>
+            </div>
+            <p style="color: var(--python-gray); line-height: 1.5; margin-bottom: 20px; font-size: 15px;">
+                Вычесление значений математических выражений.
+            </p>
+            <div class="material-buttons" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="ЛР1.pdf" download class="pdf-btn">
+                    <i class="fas fa-download"></i> Скачать PDF
+                </a>
+                <a href="ЛР1.pdf" target="_blank" class="view-pdf-btn">
+                    <i class="fas fa-eye"></i> Открыть
+                </a>
+            </div>
+        </div>
+        
+        <!-- ЛР2 -->
+        <div class="material-card">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="width: 50px; height: 50px; background: var(--python-blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 20px;">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <div>
+                    <h3 style="color: var(--python-blue); margin: 0; font-size: 18px;">Лабораторная работа 2</h3>
+                    <p style="color: var(--python-gray); font-size: 14px; margin: 5px 0 0 0;">PDF • 1 MB</p>
+                </div>
+            </div>
+            <p style="color: var(--python-gray); line-height: 1.5; margin-bottom: 20px; font-size: 15px;">
+                Работа со строками и строковыми методами.
+            </p>
+            <div class="material-buttons" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="ЛР2.pdf" download class="pdf-btn">
+                    <i class="fas fa-download"></i> Скачать PDF
+                </a>
+                <a href="ЛР2.pdf" target="_blank" class="view-pdf-btn">
+                    <i class="fas fa-eye"></i> Открыть
+                </a>
+            </div>
+        </div>
+        
+        <!-- ЛР3 -->
+        <div class="material-card">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="width: 50px; height: 50px; background: var(--python-blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 20px;">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <div>
+                    <h3 style="color: var(--python-blue); margin: 0; font-size: 18px;">Лабораторная работа 3</h3>
+                    <p style="color: var(--python-gray); font-size: 14px; margin: 5px 0 0 0;">PDF • 0.7 MB</p>
+                </div>
+            </div>
+            <p style="color: var(--python-gray); line-height: 1.5; margin-bottom: 20px; font-size: 15px;">
+                Организация циклов, вложенных циклов в программах. 
+            </p>
+            <div class="material-buttons" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="ЛР3.pdf" download class="pdf-btn">
+                    <i class="fas fa-download"></i> Скачать PDF
+                </a>
+                <a href="ЛР3.pdf" target="_blank" class="view-pdf-btn">
+                    <i class="fas fa-eye"></i> Открыть
+                </a>
+            </div>
+        </div>
+        
+        <!-- ЛР4 -->
+        <div class="material-card">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="width: 50px; height: 50px; background: var(--python-blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 20px;">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <div>
+                    <h3 style="color: var(--python-blue); margin: 0; font-size: 18px;">Лабораторная работа 4</h3>
+                    <p style="color: var(--python-gray); font-size: 14px; margin: 5px 0 0 0;">PDF • 0.7 MB</p>
+                </div>
+            </div>
+            <p style="color: var(--python-gray); line-height: 1.5; margin-bottom: 20px; font-size: 15px;">
+                Создание собственных функций, модулей и пакетов.
+            </p>
+            <div class="material-buttons" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="ЛР4.pdf" download class="pdf-btn">
+                    <i class="fas fa-download"></i> Скачать PDF
+                </a>
+                <a href="ЛР4.pdf" target="_blank" class="view-pdf-btn">
+                    <i class="fas fa-eye"></i> Открыть
+                </a>
+            </div>
+        </div>
+        
+        <!-- ЛР5 -->
+        <div class="material-card">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="width: 50px; height: 50px; background: var(--python-blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 20px;">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <div>
+                    <h3 style="color: var(--python-blue); margin: 0; font-size: 18px;">Лабораторная работа 5</h3>
+                    <p style="color: var(--python-gray); font-size: 14px; margin: 5px 0 0 0;">PDF • 1.5 MB</p>
+                </div>
+            </div>
+            <p style="color: var(--python-gray); line-height: 1.5; margin-bottom: 20px; font-size: 15px;">
+                Использование возможностей объектно-ориентированного программирования в Python.
+            </p>
+            <div class="material-buttons" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="ЛР5.pdf" download class="pdf-btn">
+                    <i class="fas fa-download"></i> Скачать PDF
+                </a>
+                <a href="ЛР5.pdf" target="_blank" class="view-pdf-btn">
+                    <i class="fas fa-eye"></i> Открыть
+                </a>
+            </div>
+        </div>
+        
+        <!-- ЛР6 -->
+        <div class="material-card">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="width: 50px; height: 50px; background: var(--python-blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 20px;">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <div>
+                    <h3 style="color: var(--python-blue); margin: 0; font-size: 18px;">Лабораторная работа 6</h3>
+                    <p style="color: var(--python-gray); font-size: 14px; margin: 5px 0 0 0;">PDF • 1 MB</p>
+                </div>
+            </div>
+            <p style="color: var(--python-gray); line-height: 1.5; margin-bottom: 20px; font-size: 15px;">
+                Разработка  программ, передающих и получающих данные по протоколу HTTP. 
+            </p>
+            <div class="material-buttons" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="ЛР6.pdf" download class="pdf-btn">
+                    <i class="fas fa-download"></i> Скачать PDF
+                </a>
+                <a href="ЛР6.pdf" target="_blank" class="view-pdf-btn">
+                    <i class="fas fa-eye"></i> Открыть
+                </a>
+            </div>
+        </div>
+        
+        <!-- ЛР9 -->
+        <div class="material-card">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="width: 50px; height: 50px; background: var(--python-blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 20px;">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <div>
+                    <h3 style="color: var(--python-blue); margin: 0; font-size: 18px;">Лабораторная работа 9</h3>
+                    <p style="color: var(--python-gray); font-size: 14px; margin: 5px 0 0 0;">PDF • 1.2 MB</p>
+                </div>
+            </div>
+            <p style="color: var(--python-gray); line-height: 1.5; margin-bottom: 20px; font-size: 15px;">
+                Создание и обработка изображений с помощью библиотек Python.     
+            </p>
+            <div class="material-buttons" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="ЛР9.pdf" download class="pdf-btn">
+                    <i class="fas fa-download"></i> Скачать PDF
+                </a>
+                <a href="ЛР9.pdf" target="_blank" class="view-pdf-btn">
+                    <i class="fas fa-eye"></i> Открыть
+                </a>
+            </div>
+        </div>
+        
+        <!-- ЛР9-10 -->
+        <div class="material-card">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="width: 50px; height: 50px; background: var(--python-blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 20px;">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <div>
+                    <h3 style="color: var(--python-blue); margin: 0; font-size: 18px;">Лабораторная работа 9-10</h3>
+                    <p style="color: var(--python-gray); font-size: 14px; margin: 5px 0 0 0;">PDF • 0.9 MB</p>
+                </div>
+            </div>
+            <p style="color: var(--python-gray); line-height: 1.5; margin-bottom: 20px; font-size: 15px;">
+                Работа с разными видами разметки (BoxLayout, FloatLayout, GridLayout) 
+            </p>
+            <div class="material-buttons" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="ЛР9-10.pdf" download class="pdf-btn">
+                    <i class="fas fa-download"></i> Скачать PDF
+                </a>
+                <a href="ЛР9-10.pdf" target="_blank" class="view-pdf-btn">
+                    <i class="fas fa-eye"></i> Открыть
+                </a>
+            </div>
+        </div>
+        
+        <!-- ЛР11 -->
+        <div class="material-card">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="width: 50px; height: 50px; background: var(--python-blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 20px;">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <div>
+                    <h3 style="color: var(--python-blue); margin: 0; font-size: 18px;">Лабораторная работа 11</h3>
+                    <p style="color: var(--python-gray); font-size: 14px; margin: 5px 0 0 0;">PDF • 0.9 MB</p>
+                </div>
+            </div>
+            <p style="color: var(--python-gray); line-height: 1.5; margin-bottom: 20px; font-size: 15px;">
+                        Работа с событиями виджетов фреймворка.
+            </p>
+            <div class="material-buttons" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="ЛР11.pdf" download class="pdf-btn">
+                    <i class="fas fa-download"></i> Скачать PDF
+                </a>
+                <a href="ЛР11.pdf" target="_blank" class="view-pdf-btn">
+                    <i class="fas fa-eye"></i> Открыть
+                </a>
+            </div>
+        </div>
+        
+        <!-- ЛР12 -->
+        <div class="material-card">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="width: 50px; height: 50px; background: var(--python-blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 20px;">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <div>
+                    <h3 style="color: var(--python-blue); margin: 0; font-size: 18px;">Лабораторная работа 12</h3>
+                    <p style="color: var(--python-gray); font-size: 14px; margin: 5px 0 0 0;">PDF • 0.2 MB</p>
+                </div>
+            </div>
+            <p style="color: var(--python-gray); line-height: 1.5; margin-bottom: 20px; font-size: 15px;">
+               Разработка apk, iOS, exe-приложений
+            </p>
+            <div class="material-buttons" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="ЛР12.pdf" download class="pdf-btn">
+                    <i class="fas fa-download"></i> Скачать PDF
+                </a>
+                <a href="ЛР12.pdf" target="_blank" class="view-pdf-btn">
+                    <i class="fas fa-eye"></i> Открыть
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+              <!-- Практические работы -->
+<div class="materials-category">
+    <h2 style="color: var(--python-blue); font-size: 28px; margin-bottom: 30px; padding-bottom: 10px; border-bottom: 2px solid var(--python-yellow);">
+        <i class="fas fa-tasks" style="margin-right: 10px;"></i>
+        Практические работы (4 работы)
+    </h2>
+    
+    <div class="materials-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 25px;">
+        <!-- Практическая 1 -->
+        <div class="material-card">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="width: 50px; height: 50px; background: var(--python-yellow); color: var(--python-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 20px;">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <div>
+                    <h3 style="color: var(--python-blue); margin: 0; font-size: 18px;">Практическая работа 1</h3>
+                    <p style="color: var(--python-gray); font-size: 14px; margin: 5px 0 0 0;">PDF • 0.9 MB</p>
+                </div>
+            </div>
+            <p style="color: var(--python-gray); line-height: 1.5; margin-bottom: 20px; font-size: 15px;">
+                Основные алгоритмы и структуры данных.
+            </p>
+            <div class="material-buttons" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="ПР1.pdf" download class="view-pdf-btn">
+                    <i class="fas fa-download"></i> Скачать PDF
+                </a>
+                <a href="ПР1.pdf" target="_blank" class="pdf-btn">
+                    <i class="fas fa-eye"></i> Открыть в браузере
+                </a>
+            </div>
+        </div>
+        
+        <!-- Практическая 2 -->
+        <div class="material-card">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="width: 50px; height: 50px; background: var(--python-yellow); color: var(--python-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 20px;">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <div>
+                    <h3 style="color: var(--python-blue); margin: 0; font-size: 18px;">Практическая работа 2</h3>
+                    <p style="color: var(--python-gray); font-size: 14px; margin: 5px 0 0 0;">PDF • 1.1 MB</p>
+                </div>
+            </div>
+            <p style="color: var(--python-gray); line-height: 1.5; margin-bottom: 20px; font-size: 15px;">
+                Работа с файлами и исключениями.
+            </p>
+            <div class="material-buttons" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="ПР2.pdf" download class="view-pdf-btn">
+                    <i class="fas fa-download"></i> Скачать PDF
+                </a>
+                <a href="ПР2.pdf" target="_blank" class="pdf-btn">
+                    <i class="fas fa-eye"></i> Открыть в браузере
+                </a>
+            </div>
+        </div>
+        
+        <!-- Практическая 3 -->
+        <div class="material-card">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="width: 50px; height: 50px; background: var(--python-yellow); color: var(--python-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 20px;">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <div>
+                    <h3 style="color: var(--python-blue); margin: 0; font-size: 18px;">Практическая работа 3</h3>
+                    <p style="color: var(--python-gray); font-size: 14px; margin: 5px 0 0 0;">PDF • 1.3 MB</p>
+                </div>
+            </div>
+            <p style="color: var(--python-gray); line-height: 1.5; margin-bottom: 20px; font-size: 15px;">
+                Функции и модули в Python.
+            </p>
+            <div class="material-buttons" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="ПР3.pdf" download class="view-pdf-btn">
+                    <i class="fas fa-download"></i> Скачать PDF
+                </a>
+                <a href="ПР3.pdf" target="_blank" class="pdf-btn">
+                    <i class="fas fa-eye"></i> Открыть в браузере
+                </a>
+            </div>
+        </div>
+        
+        <!-- Практическая 4 -->
+        <div class="material-card">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="width: 50px; height: 50px; background: var(--python-yellow); color: var(--python-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 20px;">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <div>
+                    <h3 style="color: var(--python-blue); margin: 0; font-size: 18px;">Практическая работа 4</h3>
+                    <p style="color: var(--python-gray); font-size: 14px; margin: 5px 0 0 0;">PDF • 1.2 MB</p>
+                </div>
+            </div>
+            <p style="color: var(--python-gray); line-height: 1.5; margin-bottom: 20px; font-size: 15px;">
+                ООП: классы и объекты.
+            </p>
+            <div class="material-buttons" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="ПР4.pdf" download class="view-pdf-btn">
+                    <i class="fas fa-download"></i> Скачать PDF
+                </a>
+                <a href="ПР4.pdf" target="_blank" class="pdf-btn">
+                    <i class="fas fa-eye"></i> Открыть в браузере
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+            
+            <!-- Навигация по разделам -->
+            <div style="display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+                <a href="theory.html" style="color: var(--python-blue); text-decoration: none; font-weight: 500;">
+                    <i class="fas fa-arrow-left"></i> Вернуться к теории
+                </a>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Футер -->
+    <div style="margin: 15px 0;">
+           <a href="https://instagram.com/andrey_paznanski" 
+   target="_blank" 
+   rel="noopener noreferrer"
+   style="color: white; margin: 0 10px; font-size: 18px; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 10px;"
+   onmouseover="this.style.color='var(--python-yellow)'; this.style.transform='translateY(-2px)'"
+   onmouseout="this.style.color='white'; this.style.transform='translateY(0)'">
+    <i class="fab fa-instagram" style="font-size: 20px;"></i>
+    <span>Instagram разработчика</span>
+</a>
+    
+    <!-- Модальное окно для просмотра задачи -->
+    <div class="task-modal" id="taskModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTaskTitle">Задача</h2>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body" id="modalTaskBody">
+                <!-- Содержимое будет заполнено через JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Данные задач с новой системой баллов
+        const tasksData = [
+            {
+                id: 1,
+                title: "Сумма двух чисел",
+                difficulty: "easy",
+                points: 3,
+                tags: ["основы", "функции"],
+                description: "Напишите функцию sum_two_numbers(a, b), которая принимает два числа и возвращает их сумму. Функция должна корректно работать с целыми и вещественными числами.",
+                category: "basics",
+                example: "sum_two_numbers(5, 3) → 8\nsum_two_numbers(-2, 7) → 5\nsum_two_numbers(0, 0) → 0"
+            },
+            {
+                id: 2,
+                title: "Максимум из трех чисел",
+                difficulty: "easy",
+                points: 4,
+                tags: ["условия", "основы"],
+                description: "Напишите функцию max_of_three(a, b, c), которая находит максимальное из трех чисел без использования встроенных функций. Функция должна возвращать максимальное значение.",
+                category: "basics",
+                example: "max_of_three(1, 2, 3) → 3\nmax_of_three(5, 2, 5) → 5\nmax_of_three(-1, -5, -3) → -1"
+            },
+            {
+                id: 3,
+                title: "Факториал числа",
+                difficulty: "easy",
+                points: 5,
+                tags: ["рекурсия", "циклы"],
+                description: "Напишите функцию factorial(n), которая вычисляет факториал числа n (n! = 1*2*...*n). Учтите, что 0! = 1. Функция должна работать с неотрицательными целыми числами.",
+                category: "basics",
+                example: "factorial(5) → 120\nfactorial(0) → 1\nfactorial(1) → 1\nfactorial(7) → 5040"
+            },
+            {
+                id: 4,
+                title: "Проверка палиндрома",
+                difficulty: "medium",
+                points: 6,
+                tags: ["строки", "алгоритмы"],
+                description: "Напишите функцию is_palindrome(s), которая проверяет, является ли строка палиндромом (читается одинаково слева направо и справа налево). Игнорируйте регистр букв и пробелы.",
+                category: "algorithms",
+                example: "is_palindrome('радар') → True\nis_palindrome('Python') → False\nis_palindrome('А роза упала на лапу Азора') → True"
+            },
+            {
+                id: 5,
+                title: "Сортировка списка",
+                difficulty: "medium",
+                points: 7,
+                tags: ["списки", "алгоритмы"],
+                description: "Напишите функцию sort_list(arr), которая сортирует список чисел по возрастанию без использования встроенной функции sorted(). Реализуйте любой алгоритм сортировки (например, пузырьковую сортировку).",
+                category: "algorithms",
+                example: "sort_list([3, 1, 4, 1, 5]) → [1, 1, 3, 4, 5]\nsort_list([9, 8, 7, 6]) → [6, 7, 8, 9]\nsort_list([]) → []"
+            },
+            {
+                id: 6,
+                title: "Найти все простые числа",
+                difficulty: "medium",
+                points: 8,
+                tags: ["математика", "алгоритмы"],
+                description: "Напишите функцию find_primes(n), которая возвращает список всех простых чисел до заданного числа n включительно. Используйте алгоритм 'Решето Эратосфена' или другой эффективный метод.",
+                category: "algorithms",
+                example: "find_primes(10) → [2, 3, 5, 7]\nfind_primes(20) → [2, 3, 5, 7, 11, 13, 17, 19]\nfind_primes(2) → [2]"
+            },
+            {
+                id: 7,
+                title: "Обратный список",
+                difficulty: "easy",
+                points: 4,
+                tags: ["списки", "основы"],
+                description: "Напишите функцию reverse_list(arr), которая создает новый список, который является обратным к исходному. Не используйте встроенную функцию reversed() или срезы с отрицательным шагом.",
+                category: "data-structures",
+                example: "reverse_list([1, 2, 3, 4]) → [4, 3, 2, 1]\nreverse_list(['a', 'b', 'c']) → ['c', 'b', 'a']\nreverse_list([]) → []"
+            },
+            {
+                id: 8,
+                title: "Уникальные элементы",
+                difficulty: "medium",
+                points: 6,
+                tags: ["списки", "множества"],
+                description: "Напишите функцию unique_elements(arr), которая возвращает список всех уникальных элементов в исходном списке (удаляет дубликаты). Сохраняйте порядок первого вхождения каждого элемента.",
+                category: "data-structures",
+                example: "unique_elements([1, 2, 2, 3, 4, 4, 5]) → [1, 2, 3, 4, 5]\nunique_elements(['a', 'b', 'a', 'c', 'b']) → ['a', 'b', 'c']"
+            },
+            {
+                id: 9,
+                title: "Слияние словарей",
+                difficulty: "medium",
+                points: 7,
+                tags: ["словари", "структуры данных"],
+                description: "Напишите функцию merge_dicts(dict1, dict2), которая объединяет два словаря в один. Если ключ присутствует в обоих словарях, используйте значение из второго словаря.",
+                category: "data-structures",
+                example: "merge_dicts({'a': 1, 'b': 2}, {'b': 3, 'c': 4}) → {'a': 1, 'b': 3, 'c': 4}\nmerge_dicts({}, {'x': 10, 'y': 20}) → {'x': 10, 'y': 20}"
+            },
+            {
+                id: 10,
+                title: "Задача о рюкзаке",
+                difficulty: "hard",
+                points: 9,
+                tags: ["динамическое программирование", "алгоритмы"],
+                description: "Реализуйте функцию knapsack(capacity, weights, values), которая решает классическую задачу о рюкзаке 0/1. Дана вместимость рюкзака, списки весов и стоимостей предметов. Найдите максимальную суммарную стоимость предметов, которые можно поместить в рюкзак.",
+                category: "algorithms",
+                example: "knapsack(10, [2, 3, 4, 5], [3, 4, 5, 6]) → 10 (предметы 2 и 3, или 4 и 5)\nknapsack(5, [1, 2, 3], [6, 10, 12]) → 22 (предметы 1 и 2)"
+            },
+            {
+                id: 11,
+                title: "Поиск в глубину графа",
+                difficulty: "hard",
+                points: 10,
+                tags: ["графы", "алгоритмы", "рекурсия"],
+                description: "Реализуйте алгоритм поиска в глубину (DFS) для обхода графа, представленного в виде списка смежности. Функция должна возвращать список вершин в порядке их посещения.",
+                category: "algorithms",
+                example: "graph = {0: [1, 2], 1: [2], 2: [0, 3], 3: [3]}\ndfs(graph, 2) → [2, 0, 1, 3] (один из возможных вариантов)"
+            },
+            {
+                id: 12,
+                title: "Балансировка скобок",
+                difficulty: "easy",
+                points: 3,
+                tags: ["строки", "стеки"],
+                description: "Напишите функцию is_balanced(s), которая проверяет, правильно ли расставлены скобки в строке. Поддерживайте три вида скобок: круглые (), квадратные [] и фигурные {}.",
+                category: "data-structures",
+                example: "is_balanced('({[]})') → True\nis_balanced('([)]') → False\nis_balanced('{{[[(())]]}}') → True"
+            }
+        ];
+
+        // Текущий фильтр
+        let currentFilter = 'all';
+
+        // Обработка навигации
+        document.addEventListener('DOMContentLoaded', function() {
+            const navTabs = document.querySelectorAll('.nav-tab');
+            navTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Удаляем класс active у всех вкладок
+                    navTabs.forEach(t => t.classList.remove('active'));
+                    // Добавляем класс active текущей вкладке
+                    this.classList.add('active');
+                    
+                    // Если это не текущая страница, переходим по ссылке
+                    const page = this.textContent.trim();
+                    const currentPage = 'ПРАКТИЧЕСКИЙ РАЗДЕЛ';
+                    
+                    if (page !== currentPage) {
+                        switch(page) {
+                            case 'ГЛАВНАЯ':
+                                window.location.href = 'index.html';
+                                break;
+                            case 'ТЕОРЕТИЧЕСКИЙ РАЗДЕЛ':
+                                window.location.href = 'theory.html';
+                                break;
+                            case 'ПРАКТИЧЕСКИЙ РАЗДЕЛ':
+                                window.location.href = 'practice.html';
+                                break;
+                            case 'ДОПОЛНИТЕЛЬНЫЕ МАТЕРИАЛЫ':
+                                window.location.href = 'materials.html';
+                                break;
+                        }
+                    }
+                });
+            });
+            
+            // Расчет статистики по категориям
+            calculateCategoryStats();
+            
+            // Загрузка задач при загрузке страницы
+            filterTasks('all');
+            
+            // Обработка кнопок просмотра задач
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.view-btn')) {
+                    const btn = e.target.closest('.view-btn');
+                    const taskId = btn.getAttribute('data-id');
+                    openTask(taskId);
+                }
+            });
+            
+            // Закрытие модального окна
+            document.getElementById('modalClose').addEventListener('click', closeModal);
+            document.getElementById('taskModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+            
+            // Закрытие модального окна по клавише ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            });
+            
+            // Добавляем иконку Python в заголовок вкладки
+            document.title = "📝 " + document.title;
+            
+            // Анимация при загрузке
+            setTimeout(() => {
+                // Создаем анимацию
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes slideUp {
+                        from {
+                            opacity: 0;
+                            transform: translateY(20px);
+                        }
+                        to {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+                    
+                    .category-card, .task-card, .material-card {
+                        opacity: 0;
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                // Запускаем анимацию для категорий
+                document.querySelectorAll('.category-card').forEach((card, index) => {
+                    card.style.animationDelay = `${index * 0.2}s`;
+                    card.style.animation = 'slideUp 0.5s ease forwards';
+                });
+                
+                // Запускаем анимацию для материалов
+                setTimeout(() => {
+                    document.querySelectorAll('.material-card').forEach((card, index) => {
+                        card.style.animationDelay = `${index * 0.1}s`;
+                        card.style.animation = 'slideUp 0.5s ease forwards';
+                    });
+                }, 300);
+            }, 100);
+        });
+
+        // Расчет статистики по категориям
+        function calculateCategoryStats() {
+            let basicsCount = 0;
+            let basicsPoints = 0;
+            let dataStructuresCount = 0;
+            let dataStructuresPoints = 0;
+            let algorithmsCount = 0;
+            let algorithmsPoints = 0;
+            
+            tasksData.forEach(task => {
+                if (task.category === 'basics') {
+                    basicsCount++;
+                    basicsPoints += task.points;
+                } else if (task.category === 'data-structures') {
+                    dataStructuresCount++;
+                    dataStructuresPoints += task.points;
+                } else if (task.category === 'algorithms') {
+                    algorithmsCount++;
+                    algorithmsPoints += task.points;
+                }
+            });
+            
+            // Обновляем статистику в интерфейсе
+            document.getElementById('basics-count').textContent = basicsCount;
+            document.getElementById('basics-points').textContent = basicsPoints;
+            document.getElementById('data-structures-count').textContent = dataStructuresCount;
+            document.getElementById('data-structures-points').textContent = dataStructuresPoints;
+            document.getElementById('algorithms-count').textContent = algorithmsCount;
+            document.getElementById('algorithms-points').textContent = algorithmsPoints;
+        }
+
+        // Функция фильтрации задач
+        function filterTasks(filter) {
+            currentFilter = filter;
+            
+            // Обновляем активную кнопку
+            document.querySelectorAll('.difficulty-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.querySelector(`.difficulty-btn[onclick="filterTasks('${filter}')"]`).classList.add('active');
+            
+            // Отображаем задачи
+            renderTasks(filter);
+        }
+
+        // Функция отрисовки задач
+        function renderTasks(filter) {
+            const container = document.getElementById('tasks-container');
+            container.innerHTML = '';
+            
+            // Фильтруем задачи
+            let filteredTasks;
+            if (filter === 'all') {
+                filteredTasks = tasksData;
+            } else {
+                filteredTasks = tasksData.filter(task => task.difficulty === filter);
+            }
+            
+            // Сортируем по id
+            filteredTasks.sort((a, b) => a.id - b.id);
+            
+            // Создаем карточки задач
+            filteredTasks.forEach((task, index) => {
+                const taskCard = createTaskCard(task, index);
+                container.appendChild(taskCard);
+            });
+            
+            // Если задач нет
+            if (filteredTasks.length === 0) {
+                const noTasks = document.createElement('div');
+                noTasks.className = 'no-tasks';
+                noTasks.innerHTML = `
+                    <i class="fas fa-search"></i>
+                    <h3>Задачи не найдены</h3>
+                    <p>Попробуйте выбрать другую сложность</p>
+                `;
+                container.appendChild(noTasks);
+            }
+            
+            // Анимация для новых карточек
+            setTimeout(() => {
+                document.querySelectorAll('.task-card').forEach((card, index) => {
+                    card.style.animationDelay = `${index * 0.1}s`;
+                    card.style.animation = 'slideUp 0.5s ease forwards';
+                });
+            }, 50);
+        }
+
+        // Создание карточки задачи
+        function createTaskCard(task, index) {
+            const card = document.createElement('div');
+            card.className = 'task-card';
+            card.setAttribute('data-id', task.id);
+            card.setAttribute('data-difficulty', task.difficulty);
+            card.style.animationDelay = `${index * 0.1}s`;
+            
+            const difficultyClass = `difficulty-${task.difficulty}`;
+            const difficultyText = {
+                'easy': 'Легкая',
+                'medium': 'Средняя',
+                'hard': 'Сложная'
+            }[task.difficulty];
+            
+            // Создаем теги
+            const tagsHTML = task.tags.map(tag => 
+                `<span class="task-tag">${tag}</span>`
+            ).join('');
+            
+            card.innerHTML = `
+                <div class="task-header">
+                    <div class="task-number">Задача #${task.id}</div>
+                    <div class="task-difficulty ${difficultyClass}">${difficultyText}</div>
+                </div>
+                <h3 class="task-title">${task.title}</h3>
+                <p class="task-description">${task.description.substring(0, 100)}...</p>
+                <div class="task-tags">
+                    ${tagsHTML}
+                </div>
+                <div class="task-footer">
+                    <button class="view-btn" data-id="${task.id}">
+                        <i class="fas fa-eye"></i> Просмотреть условие
+                    </button>
+                    <div class="task-points">
+                        <i class="fas fa-star"></i> ${task.points} баллов
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Открытие задачи в модальном окне
+        function openTask(taskId) {
+            const task = tasksData.find(t => t.id == taskId);
+            if (!task) return;
+            
+            const modal = document.getElementById('taskModal');
+            const modalTitle = document.getElementById('modalTaskTitle');
+            const modalBody = document.getElementById('modalTaskBody');
+            
+            const difficultyText = {
+                'easy': 'Легкая',
+                'medium': 'Средняя',
+                'hard': 'Сложная'
+            }[task.difficulty];
+            
+            const difficultyColor = {
+                'easy': '#10b981',
+                'medium': '#f59e0b',
+                'hard': '#ef4444'
+            }[task.difficulty];
+            
+            const categoryText = {
+                'basics': 'Основы Python',
+                'data-structures': 'Структуры данных',
+                'algorithms': 'Алгоритмы'
+            }[task.category];
+            
+            // Заполняем модальное окно
+            modalTitle.textContent = task.title;
+            modalBody.innerHTML = `
+                <div class="modal-task-number">
+                    <span>Задача #${task.id}</span>
+                    <span style="font-size: 14px; color: ${difficultyColor}; font-weight: 600;">
+                        ${difficultyText}
+                    </span>
+                </div>
+                
+                <div class="modal-task-description">
+                    <strong>Условие задачи:</strong><br><br>
+                    ${task.description}
+                </div>
+                
+                ${task.example ? `
+                <div class="modal-task-description" style="background: #f8f9fa; border-left-color: #306998;">
+                    <strong>Примеры:</strong><br><br>
+                    <pre style="font-family: 'Courier New', monospace; background: white; padding: 15px; border-radius: 5px; overflow-x: auto;">${task.example}</pre>
+                </div>
+                ` : ''}
+                
+                <div class="modal-task-details">
+                    <div class="modal-detail-card">
+                        <div class="detail-label">Сложность</div>
+                        <div class="detail-value" style="color: ${difficultyColor};">${difficultyText}</div>
+                    </div>
+                    
+                    <div class="modal-detail-card">
+                        <div class="detail-label">Категория</div>
+                        <div class="detail-value">${categoryText}</div>
+                    </div>
+                    
+                    <div class="modal-detail-card">
+                        <div class="detail-label">Баллы</div>
+                        <div class="detail-value" style="color: var(--python-yellow);">${task.points}/10</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+                    <p style="color: var(--python-gray); font-size: 14px;">
+                        <i class="fas fa-lightbulb" style="color: var(--python-yellow);"></i> 
+                        <strong>Совет:</strong> Внимательно прочитайте условие, подумайте над алгоритмом решения, прежде чем приступать к реализации.
+                    </p>
+                </div>
+            `;
+            
+            // Показываем модальное окно
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Закрытие модального окна
+        function closeModal() {
+            const modal = document.getElementById('taskModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+</body>
+</html>

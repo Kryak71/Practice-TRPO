@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Теоретический раздел - УМК по ИПО</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Цветовая палитра Python: синий (#306998) и желтый (#FFD43B) */
+        :root {
+            --python-blue: #306998;
+            --python-blue-dark: #25567c;
+            --python-yellow: #FFD43B;
+            --python-yellow-dark: #e6bf35;
+            --python-light: #f0f8ff;
+            --python-gray: #5f6368;
+            --python-light-gray: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--python-light) 0%, #ffffff 100%);
+            color: #202124;
+            min-height: 100vh;
+        }
+        
+        /* Шапка сайта */
+        .site-header {
+            background: linear-gradient(to right, var(--python-blue), var(--python-blue-dark));
+            padding: 15px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(48, 105, 152, 0.2);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            color: var(--python-yellow);
+            font-size: 28px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px;
+            border-radius: 8px;
+        }
+        
+        .site-name {
+            font-size: 24px;
+            font-weight: 500;
+            color: white;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Место для фото справа */
+        .header-photo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .institute-photo {
+            height: 50px;
+            width: auto;
+            border-radius: 4px;
+            transition: transform 0.3s;
+            object-fit: contain;
+            background-color: white;
+            padding: 2px;
+        }
+        
+        .institute-photo:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Навигационная панель */
+        .nav-container {
+            background: white;
+            border-bottom: 3px solid var(--python-yellow);
+            padding: 0 24px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .nav-tabs {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-tab {
+            padding: 18px 24px;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #000000;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .nav-tab:hover {
+            background-color: rgba(255, 212, 59, 0.1);
+            color: #000000;
+        }
+        
+        .nav-tab.active {
+            color: #000000;
+            border-bottom-color: var(--python-yellow);
+            background-color: transparent;
+            font-weight: 600;
+        }
+        
+        /* Основной контент */
+        .main-content {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+        
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(48, 105, 152, 0.1);
+            border-top: 5px solid var(--python-blue);
+            margin-bottom: 30px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--python-yellow);
+        }
+        
+        .section-icon {
+            background: var(--python-yellow);
+            color: var(--python-blue);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 24px;
+        }
+        
+        .section-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--python-blue);
+            margin: 0;
+        }
+        
+        /* Тематические блоки */
+        .topic-card {
+            background: var(--python-light);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--python-blue);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(48, 105, 152, 0.15);
+        }
+        
+        .topic-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .topic-number {
+            background: var(--python-blue);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 16px;
+        }
+        
+        .topic-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--python-blue);
+            margin: 0;
+        }
+        
+        .topic-content {
+            color: var(--python-gray);
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        
+        .subtopics {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+        
+        .subtopic {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 25px;
+            color: var(--python-gray);
+        }
+        
+        .subtopic:before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: var(--python-yellow);
+            font-size: 12px;
+        }
+        
+        /* Материалы для скачивания */
+        .materials-section {
+            background: linear-gradient(to right, var(--python-light), #ffffff);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 40px;
+            border: 2px dashed var(--python-yellow);
+        }
+        
+        .materials-title {
+            font-size: 20px;
+            color: var(--python-blue);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .materials-title i {
+            margin-right: 10px;
+            color: var(--python-yellow);
+        }
+        
+        .material-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background: white;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+        
+        .material-item:hover {
+            background: var(--python-light);
+            border-color: var(--python-yellow);
+        }
+        
+        .material-icon {
+            color: var(--python-blue);
+            margin-right: 15px;
+            font-size: 20px;
+        }
+        
+        .material-info {
+            flex-grow: 1;
+        }
+        
+        .material-name {
+            font-weight: 500;
+            color: var(--python-blue);
+            margin: 0;
+        }
+        
+        .open-btn {
+            background: var(--python-blue);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-family: inherit;
+            font-size: 14px;
+            display: inline-block;
+        }
+        
+        .open-btn:hover {
+            background: var(--python-blue-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(48, 105, 152, 0.3);
+        }
+        
+        /* Футер */
+        .site-footer {
+            background: linear-gradient(to right, var(--python-blue), var(--python-blue-dark));
+            color: white;
+            padding: 30px 24px;
+            margin-top: 60px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .python-snake {
+            font-size: 14px;
+            color: var(--python-yellow);
+            margin-top: 10px;
+            font-family: monospace;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .site-header, .nav-container {
+                padding: 12px 16px;
+            }
+            
+            .main-content {
+                padding: 0 16px;
+                margin: 20px auto;
+            }
+            
+            .content-card {
+                padding: 25px 20px;
+            }
+            
+            .nav-tab {
+                padding: 14px 16px;
+                font-size: 13px;
+            }
+            
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .site-name {
+                font-size: 20px;
+            }
+            
+            .institute-photo {
+                height: 40px;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .section-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .material-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .open-btn {
+                align-self: flex-end;
+                margin-top: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .institute-photo {
+                height: 35px;
+            }
+            
+            .topic-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .topic-number {
+                margin-bottom: 10px;
+            }
+            
+            .material-item {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="site-header">
+        <div class="logo">
+            <i class="fab fa-python logo-icon"></i>
+            <span class="site-name">УМК по ИПО</span>
+        </div>
+        
+        <!-- Место для вашего фото -->
+        <div class="header-photo">
+            <img src="GGPK.png" 
+                 alt="Герб или логотип института" 
+                 class="institute-photo"
+                 onerror="this.style.display='none'">
+        </div>
+    </header>
+    
+    <!-- Навигационная панель -->
+    <!-- Навигационная панель -->
+<nav class="nav-container">
+    <ul class="nav-tabs">
+        <li class="nav-tab" onclick="window.location.href='index.html'">ГЛАВНАЯ</li>
+        <li class="nav-tab active">ТЕОРЕТИЧЕСКИЙ РАЗДЕЛ</li>
+        <li class="nav-tab" onclick="window.location.href='practice.html'">ПРАКТИЧЕСКИЙ РАЗДЕЛ</li>
+        <li class="nav-tab" onclick="window.location.href='materials.html'">ДОПОЛНИТЕЛЬНЫЕ МАТЕРИАЛЫ</li>
+    </ul>
+</nav>
+    
+    <!-- Основной контент -->
+    <main class="main-content">
+        <div class="content-card">
+            <!-- Заголовок раздела -->
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h1 class="section-title">Теоретический раздел</h1>
+            </div>
+            
+            <!-- Описание раздела -->
+            <div style="margin-bottom: 40px;">
+                <p style="font-size: 18px; line-height: 1.6; color: var(--python-gray); margin-bottom: 20px;">
+                    В данном разделе представлены основные теоретические материалы для изучения языка программирования Python. Теория структурирована от простого к сложному и охватывает все ключевые аспекты языка.
+                </p>
+            </div>
+            
+            <!-- Тема 1: Введение в Python -->
+            <div class="topic-card">
+                <div class="topic-header">
+                    <div class="topic-number">1</div>
+                    <h3 class="topic-title">Введение в Python</h3>
+                </div>
+                <div class="topic-content">
+                    <p>Основные концепции языка Python, история создания, философия Python (The Zen of Python), установка и настройка среды разработки.</p>
+                    
+                    <div class="subtopics">
+                        <div class="subtopic">История и философия языка Python</div>
+                        <div class="subtopic">Установка Python и настройка окружения</div>
+                        <div class="subtopic">Первая программа "Hello, World!"</div>
+                        <div class="subtopic">Интерактивный режим Python (REPL)</div>
+                        <div class="subtopic">Основные IDE: PyCharm, VS Code, Jupyter Notebook</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Тема 2: Базовый синтаксис -->
+            <div class="topic-card">
+                <div class="topic-header">
+                    <div class="topic-number">2</div>
+                    <h3 class="topic-title">Базовый синтаксис Python</h3>
+                </div>
+                <div class="topic-content">
+                    <p>Изучение основных конструкций языка: переменные, типы данных, операторы, основные встроенные функции.</p>
+                    
+                    <div class="subtopics">
+                        <div class="subtopic">Переменные и именование (PEP 8)</div>
+                        <div class="subtopic">Основные типы данных: int, float, str, bool</div>
+                        <div class="subtopic">Операторы: арифметические, сравнения, логические</div>
+                        <div class="subtopic">Ввод и вывод данных (input(), print())</div>
+                        <div class="subtopic">Преобразование типов данных</div>
+                        <div class="subtopic">Комментарии и документирование кода</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Тема 3: Структуры данных -->
+            <div class="topic-card">
+                <div class="topic-header">
+                    <div class="topic-number">3</div>
+                    <h3 class="topic-title">Структуры данных в Python</h3>
+                </div>
+                <div class="topic-content">
+                    <p>Работа с основными структурами данных: списки, кортежи, словари, множества. Методы и операции для каждой структуры.</p>
+                    
+                    <div class="subtopics">
+                        <div class="subtopic">Списки (list): создание, методы, срезы</div>
+                        <div class="subtopic">Кортежи (tuple): особенности и применение</div>
+                        <div class="subtopic">Словари (dict): ключи, значения, методы</div>
+                        <div class="subtopic">Множества (set): операции над множествами</div>
+                        <div class="subtopic">Генераторы списков, словарей, множеств</div>
+                        <div class="subtopic">Глубокое и поверхностное копирование</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Тема 4: Управляющие конструкции -->
+            <div class="topic-card">
+                <div class="topic-header">
+                    <div class="topic-number">4</div>
+                    <h3 class="topic-title">Управляющие конструкции</h3>
+                </div>
+                <div class="topic-content">
+                    <p>Условные операторы и циклы для управления потоком выполнения программы.</p>
+                    
+                    <div class="subtopics">
+                        <div class="subtopic">Условный оператор if-elif-else</div>
+                        <div class="subtopic">Цикл for: итерация по последовательностям</div>
+                        <div class="subtopic">Цикл while: условное повторение</div>
+                        <div class="subtopic">Операторы break, continue, pass</div>
+                        <div class="subtopic">Вложенные циклы и условия</div>
+                        <div class="subtopic">Тернарный оператор</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Тема 5: Функции -->
+            <div class="topic-card">
+                <div class="topic-header">
+                    <div class="topic-number">5</div>
+                    <h3 class="topic-title">Функции в Python</h3>
+                </div>
+                <div class="topic-content">
+                    <p>Создание и использование функций, параметры, возвращаемые значения, области видимости.</p>
+                    
+                    <div class="subtopics">
+                        <div class="subtopic">Определение и вызов функций (def)</div>
+                        <div class="subtopic">Позиционные и именованные аргументы</div>
+                        <div class="subtopic">Аргументы по умолчанию</div>
+                        <div class="subtopic">*args и **kwargs для переменного числа аргументов</div>
+                        <div class="subtopic">Возвращение значений (return)</div>
+                        <div class="subtopic">Области видимости: local, enclosing, global, built-in (LEGB)</div>
+                        <div class="subtopic">Lambda-функции</div>
+                        <div class="subtopic">Декораторы функций</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Тема 6: ООП -->
+            <div class="topic-card">
+                <div class="topic-header">
+                    <div class="topic-number">6</div>
+                    <h3 class="topic-title">Объектно-ориентированное программирование</h3>
+                </div>
+                <div class="topic-content">
+                    <p>Основы ООП в Python: классы, объекты, наследование, полиморфизм, инкапсуляция.</p>
+                    
+                    <div class="subtopics">
+                        <div class="subtopic">Классы и объекты (class)</div>
+                        <div class="subtopic">Конструктор __init__ и атрибуты</div>
+                        <div class="subtopic">Методы: экземплярные, классовые, статические</div>
+                        <div class="subtopic">Наследование и полиморфизм</div>
+                        <div class="subtopic">Инкапсуляция и свойства (@property)</div>
+                        <div class="subtopic">Магические методы (__str__, __repr__, etc.)</div>
+                        <div class="subtopic">Абстрактные классы и методы</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Тема 7: Обработка исключений -->
+            <div class="topic-card">
+                <div class="topic-header">
+                    <div class="topic-number">7</div>
+                    <h3 class="topic-title">Обработка исключений</h3>
+                </div>
+                <div class="topic-content">
+                    <p>Механизм обработки ошибок и исключений для создания устойчивых программ.</p>
+                    
+                    <div class="subtopics">
+                        <div class="subtopic">Блоки try-except</div>
+                        <div class="subtopic">Типы исключений (ValueError, TypeError, etc.)</div>
+                        <div class="subtopic">Блоки else и finally</div>
+                        <div class="subtopic">Создание пользовательских исключений</div>
+                        <div class="subtopic">Исключения в функциях и методах</div>
+                        <div class="subtopic">Логирование ошибок</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Материалы для скачивания -->
+            <div class="materials-section">
+                <h3 class="materials-title">
+                    <i class="fas fa-download"></i> Теоретические материалы для скачивания
+                </h3>
+                
+                <!-- Лекция 1 -->
+                <div class="material-item">
+                    <div class="material-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="material-info">
+                        <div class="material-name">Лекция 1: Введение в Python</div>
+                    </div>
+                    <a href="https://docs.python.org/3/tutorial/appetite.html" 
+                       target="_blank" 
+                       class="open-btn">
+                        Перейти
+                    </a>
+                </div>
+                
+                <!-- Лекция 2 -->
+                <div class="material-item">
+                    <div class="material-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="material-info">
+                        <div class="material-name">Лекция 2: Базовый синтаксис</div>
+                    </div>
+                    <a href="https://docs.python.org/3/tutorial/introduction.html" 
+                       target="_blank" 
+                       class="open-btn">
+                        Перейти
+                    </a>
+                </div>
+                
+                <!-- Лекция 3 -->
+                <div class="material-item">
+                    <div class="material-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="material-info">
+                        <div class="material-name">Лекция 3: Структуры данных</div>
+                    </div>
+                    <a href="https://docs.python.org/3/tutorial/datastructures.html" 
+                       target="_blank" 
+                       class="open-btn">
+                        Перейти
+                    </a>
+                </div>
+                
+                <!-- Полный курс -->
+                <div class="material-item">
+                    <div class="material-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="material-info">
+                        <div class="material-name">Конспект: Все темы (полный курс)</div>
+                    </div>
+                    <a href="https://docs.python.org/3/tutorial/index.html" 
+                       target="_blank" 
+                       class="open-btn">
+                        Перейти
+                    </a>
+                </div>
+                
+                <!-- Дополнительный материал -->
+                <div class="material-item">
+                    <div class="material-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="material-info">
+                        <div class="material-name">Python для начинающих</div>
+                    </div>
+                    <a href="https://pythonworld.ru/samouchitel-python" 
+                       target="_blank" 
+                       class="open-btn">
+                        Перейти
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Навигация по разделам -->
+            <div style="display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+                <a href="index.html" style="color: var(--python-blue); text-decoration: none; font-weight: 500;">
+                    <i class="fas fa-arrow-left"></i> Вернуться на главную
+                </a>
+                <a href="practice.html" style="color: var(--python-blue); text-decoration: none; font-weight: 500;">
+                    Перейти к практическому разделу <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Футер -->
+     <div style="margin: 15px 0;">
+           <a href="https://instagram.com/andrey_paznanski" 
+   target="_blank" 
+   rel="noopener noreferrer"
+   style="color: white; margin: 0 10px; font-size: 18px; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 10px;"
+   onmouseover="this.style.color='var(--python-yellow)'; this.style.transform='translateY(-2px)'"
+   onmouseout="this.style.color='white'; this.style.transform='translateY(0)'">
+    <i class="fab fa-instagram" style="font-size: 20px;"></i>
+    <span>Instagram разработчика</span>
+</a>
+    
+    <script>
+        // Обработка навигации
+        document.addEventListener('DOMContentLoaded', function() {
+            const navTabs = document.querySelectorAll('.nav-tab');
+            navTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Удаляем класс active у всех вкладок
+                    navTabs.forEach(t => t.classList.remove('active'));
+                    // Добавляем класс active текущей вкладке
+                    this.classList.add('active');
+                    
+                    // Если это не текущая страница, переходим по ссылке
+                    const page = this.textContent.trim();
+                    const currentPage = 'ТЕОРЕТИЧЕСКИЙ РАЗДЕЛ';
+                    
+                    if (page !== currentPage) {
+                        switch(page) {
+                            case 'ГЛАВНАЯ':
+                                window.location.href = 'index.html';
+                                break;
+                            case 'ТЕОРЕТИЧЕСКИЙ РАЗДЕЛ':
+                                window.location.href = 'theory.html';
+                                break;
+                            case 'ПРАКТИЧЕСКИЙ РАЗДЕЛ':
+                                window.location.href = 'practice.html';
+                                break;
+                            case 'ДОПОЛНИТЕЛЬНЫЕ МАТЕРИАЛЫ':
+                                window.location.href = 'materials.html';
+                                break;
+                            
+                        }
+                    }
+                });
+            });
+            
+            // Обработка кнопок перехода
+            const openBtns = document.querySelectorAll('.open-btn');
+            openBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    // Получаем название материала
+                    const materialItem = this.closest('.material-item');
+                    const materialName = materialItem.querySelector('.material-name').textContent;
+                    
+                    // Показываем уведомление об открытии
+                    showNotification(`"${materialName}" открыт!`, 'success');
+                });
+            });
+            
+            // Функция для показа уведомлений
+            function showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: ${type === 'info' ? 'var(--python-blue)' : '#4CAF50'};
+                    color: white;
+                    padding: 15px 25px;
+                    border-radius: 8px;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                    z-index: 1000;
+                    opacity: 0;
+                    transform: translateX(100px);
+                    transition: all 0.3s ease;
+                    font-weight: 500;
+                    max-width: 350px;
+                    word-wrap: break-word;
+                `;
+                notification.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <i class="fas ${type === 'info' ? 'fa-info-circle' : 'fa-check-circle'}"></i>
+                        <span>${message}</span>
+                    </div>
+                `;
+                document.body.appendChild(notification);
+                
+                // Анимация появления
+                setTimeout(() => {
+                    notification.style.opacity = '1';
+                    notification.style.transform = 'translateX(0)';
+                }, 10);
+                
+                // Автоматическое скрытие через 3 секунды
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    notification.style.transform = 'translateX(100px)';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+                
+                // Возможность закрыть уведомление
+                notification.addEventListener('click', function() {
+                    notification.style.opacity = '0';
+                    notification.style.transform = 'translateX(100px)';
+                    setTimeout(() => notification.remove(), 300);
+                });
+            }
+            
+            // Добавляем иконку Python в заголовок вкладки
+            document.title = "📚 " + document.title;
+            
+            // Анимация при загрузке
+            setTimeout(() => {
+                document.querySelectorAll('.topic-card').forEach((card, index) => {
+                    card.style.animationDelay = `${index * 0.1}s`;
+                    card.style.animation = 'slideUp 0.5s ease forwards';
+                });
+                
+                // Создаем анимацию
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes slideUp {
+                        from {
+                            opacity: 0;
+                            transform: translateY(20px);
+                        }
+                        to {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+                    
+                    .topic-card {
+                        opacity: 0;
+                    }
+                `;
+                document.head.appendChild(style);
+            }, 100);
+        });
+    </script>
+</body>
+</html>

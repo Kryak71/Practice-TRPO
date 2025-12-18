@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>УМК по ИПО - Google Sites</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Цветовая палитра Python: синий (#306998) и желтый (#FFD43B) */
+        :root {
+            --python-blue: #306998;
+            --python-blue-dark: #25567c;
+            --python-yellow: #FFD43B;
+            --python-yellow-dark: #e6bf35;
+            --python-light: #f0f8ff;
+            --python-gray: #5f6368;
+            --python-light-gray: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--python-light) 0%, #ffffff 100%);
+            color: #202124;
+            min-height: 100vh;
+        }
+        
+        /* Шапка сайта */
+        .site-header {
+            background: linear-gradient(to right, var(--python-blue), var(--python-blue-dark));
+            padding: 15px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(48, 105, 152, 0.2);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            color: var(--python-yellow);
+            font-size: 28px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px;
+            border-radius: 8px;
+        }
+        
+        .site-name {
+            font-size: 24px;
+            font-weight: 500;
+            color: white;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Место для фото справа */
+        .header-photo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .institute-photo {
+            height: 50px;
+            width: auto;
+            border-radius: 4px;
+            transition: transform 0.3s;
+            object-fit: contain;
+            background-color: white;
+            padding: 2px;
+        }
+        
+        .institute-photo:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Навигационная панель */
+        .nav-container {
+            background: white;
+            border-bottom: 3px solid var(--python-yellow);
+            padding: 0 24px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .nav-tabs {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-tab {
+            padding: 18px 24px;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #000000;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .nav-tab:hover {
+            background-color: rgba(255, 212, 59, 0.1);
+            color: #000000;
+        }
+        
+        .nav-tab.active {
+            color: #000000;
+            border-bottom-color: var(--python-yellow);
+            background-color: transparent;
+            font-weight: 600;
+        }
+        
+        /* Основной контент */
+        .main-content {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+        
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(48, 105, 152, 0.1);
+            border-top: 5px solid var(--python-blue);
+            margin-bottom: 30px;
+        }
+        
+        .python-title {
+            background: linear-gradient(to right, var(--python-blue), var(--python-blue-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .teacher-card {
+            background: linear-gradient(to right, var(--python-light), #ffffff);
+            border-left: 4px solid var(--python-yellow);
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(255, 212, 59, 0.1);
+        }
+        
+        /* Декор Python */
+        .python-decor {
+            position: relative;
+        }
+        
+        .python-decor::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--python-blue), var(--python-yellow));
+            border-radius: 2px;
+        }
+        
+        /* Футер */
+        .site-footer {
+            background: linear-gradient(to right, var(--python-blue), var(--python-blue-dark));
+            color: white;
+            padding: 30px 24px;
+            margin-top: 60px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .python-snake {
+            font-size: 14px;
+            color: var(--python-yellow);
+            margin-top: 10px;
+            font-family: monospace;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .site-header, .nav-container {
+                padding: 12px 16px;
+            }
+            
+            .main-content {
+                padding: 0 16px;
+                margin: 20px auto;
+            }
+            
+            .content-card {
+                padding: 25px 20px;
+            }
+            
+            .nav-tab {
+                padding: 14px 16px;
+                font-size: 13px;
+            }
+            
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .site-name {
+                font-size: 20px;
+            }
+            
+            .institute-photo {
+                height: 40px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .institute-photo {
+                height: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="site-header">
+        <div class="logo">
+            <i class="fab fa-python logo-icon"></i>
+            <span class="site-name">УМК по ИПО</span>
+        </div>
+        
+        <!-- Место для вашего фото -->
+        <div class="header-photo">
+            <!-- ВАЖНО: Замените "ваше-фото.png" на имя вашего файла -->
+            <img src="GGPK.png" 
+                 alt="Герб или логотип института" 
+                 class="institute-photo">
+        </div>
+    </header>
+    
+    <!-- Навигационная панель -->
+    <nav class="nav-container">
+        <ul class="nav-tabs">
+            <li class="nav-tab active">ГЛАВНАЯ</li>
+
+            <li class="nav-tab" onclick="window.location.href='theory.html'">ТЕОРЕТИЧЕСКИЙ РАЗДЕЛ</li>
+            <li class="nav-tab" onclick="window.location.href='practice.html'">ПРАКТИЧЕСКИЙ РАЗДЕЛ</li>
+            <li class="nav-tab" onclick="window.location.href='materials.html'">ДОПОЛНИТЕЛЬНЫЕ МАТЕРИАЛЫ</li>
+        </ul>
+    </nav>
+    
+    <!-- Основной контент -->
+    <main class="main-content">
+        <div class="content-card">
+            <h1 class="python-title" style="font-size: 36px; font-weight: 600; margin-bottom: 20px;">
+                УМК ПО УЧЕБНОМУ ПРЕДМЕТУ "ИПО"
+            </h1>
+            
+            <div class="python-decor">
+                <h2 style="font-size: 28px; font-weight: 500; margin-bottom: 30px; color: #202124;">
+                    Учебно-методический комплекс<br>по учебному предмету "ИПО"
+                </h2>
+            </div>
+            
+            <div class="teacher-card">
+                <div style="font-size: 20px; color: var(--python-blue); font-weight: 500;">
+                    <i class="fas fa-chalkboard-teacher" style="color: var(--python-yellow); margin-right: 10px;"></i>
+                    Преподаватель: Кизер Ольга Ивановна
+                </div>
+            </div>
+        </div>
+        
+        <!-- Дополнительный контент -->
+        <div class="content-card">
+            <h3 style="font-size: 24px; margin-bottom: 20px; color: var(--python-blue); border-left: 4px solid var(--python-yellow); padding-left: 15px;">
+                <i class="fas fa-info-circle" style="color: var(--python-yellow); margin-right: 10px;"></i>
+                О курсе
+            </h3>
+            <div style="line-height: 1.7; color: var(--python-gray);">
+                <p style="margin-bottom: 20px; font-size: 16px;">
+                    <strong style="color: var(--python-blue);">Python</strong> — современный высокоуровневый язык программирования, отличающийся простым и понятным синтаксисом. Применяется в веб-разработке, анализе данных, машинном обучении, автоматизации процессов и научных исследованиях.
+                </p>
+                <p style="margin-bottom: 20px; font-size: 16px;">
+                    Данный учебно-методический комплекс разработан для системного освоения основ программирования на языке Python. Курс охватывает ключевые темы: от базовых конструкций языка и структур данных до основ объектно-ориентированного программирования и работы с популярными библиотеками.
+                </p>
+                <div style="background: var(--python-light); padding: 20px; border-radius: 8px; border-left: 4px solid var(--python-yellow); margin-top: 25px;">
+                    <p style="font-style: italic; color: var(--python-blue); margin-bottom: 10px;">
+                        <i class="fas fa-quote-left" style="color: var(--python-yellow); margin-right: 10px;"></i>
+                        Python — язык, который позволяет работать быстро и эффективно интегрировать системы. Его читаемость и минималистичный синтаксис делают его идеальным выбором как для новичков, так и для опытных разработчиков.
+                    </p>
+                    <p style="text-align: right; color: var(--python-gray);">
+                        — Гвидо ван Россум, создатель Python
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+<!-- Быстрый доступ к разделам -->
+<div class="content-card">
+    <h3 style="font-size: 24px; margin-bottom: 25px; color: var(--python-blue); border-left: 4px solid var(--python-yellow); padding-left: 15px;">
+        <i class="fas fa-rocket" style="color: var(--python-yellow); margin-right: 10px;"></i>
+        Быстрый доступ
+    </h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+        <!-- Теоретический раздел -->
+        <div style="background: var(--python-light); padding: 25px; border-radius: 10px; border: 2px solid transparent; transition: all 0.3s; cursor: pointer;" 
+             onclick="window.location.href='theory.html'"
+             onmouseover="this.style.borderColor='var(--python-yellow)'; this.style.transform='translateY(-5px)'"
+             onmouseout="this.style.borderColor='transparent'; this.style.transform='translateY(0)'">
+            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                <div style="background: var(--python-blue); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px;">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h4 style="font-size: 18px; color: var(--python-blue); font-weight: 600;">Теоретический раздел</h4>
+            </div>
+            <p style="color: var(--python-gray); font-size: 14px; line-height: 1.5;">
+                Изучите теорию программирования на Python: синтаксис, структуры данных, функции, модули и объектно-ориентированное программирование.
+            </p>
+        </div>
+        
+        <!-- Практический раздел -->
+        <div style="background: var(--python-light); padding: 25px; border-radius: 10px; border: 2px solid transparent; transition: all 0.3s; cursor: pointer;" 
+             onclick="window.location.href='practice.html'"
+             onmouseover="this.style.borderColor='var(--python-yellow)'; this.style.transform='translateY(-5px)'"
+             onmouseout="this.style.borderColor='transparent'; this.style.transform='translateY(0)'">
+            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                <div style="background: var(--python-blue); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px;">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h4 style="font-size: 18px; color: var(--python-blue); font-weight: 600;">Практический раздел</h4>
+            </div>
+            <p style="color: var(--python-gray); font-size: 14px; line-height: 1.5;">
+                Решайте практические задачи разной сложности для закрепления материала и развития навыков программирования.
+            </p>
+        </div>
+        
+        <!-- Дополнительные материалы -->
+        <div style="background: var(--python-light); padding: 25px; border-radius: 10px; border: 2px solid transparent; transition: all 0.3s; cursor: pointer;" 
+             onclick="window.location.href='materials.html'"
+             onmouseover="this.style.borderColor='var(--python-yellow)'; this.style.transform='translateY(-5px)'"
+             onmouseout="this.style.borderColor='transparent'; this.style.transform='translateY(0)'">
+            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                <div style="background: var(--python-blue); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px;">
+                    <i class="fas fa-external-link-alt"></i>
+                </div>
+                <h4 style="font-size: 18px; color: var(--python-blue); font-weight: 600;">Дополнительные материалы</h4>
+            </div>
+            <p style="color: var(--python-gray); font-size: 14px; line-height: 1.5;">
+                Полезные ресурсы, ссылки, видеоуроки и дополнительные материалы для углубленного изучения Python.
+            </p>
+        </div>
+    </div>
+</div>
+</main>
+    <!-- Футер -->
+    <footer class="site-footer">
+    <div class="footer-content">
+        <div style="font-size: 16px; margin-bottom: 10px;">
+            © 2025 Учебно-методический комплекс по ИПО
+        </div>
+        
+        <!-- Соцсети -->
+        <div style="margin: 15px 0;">
+           <a href="https://instagram.com/andrey_paznanski" 
+   target="_blank" 
+   rel="noopener noreferrer"
+   style="color: white; margin: 0 10px; font-size: 18px; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 10px;"
+   onmouseover="this.style.color='var(--python-yellow)'; this.style.transform='translateY(-2px)'"
+   onmouseout="this.style.color='white'; this.style.transform='translateY(0)'">
+    <i class="fab fa-instagram" style="font-size: 20px;"></i>
+    <span>Instagram разработчика</span>
+</a>
+    
+    <script>
+        // Обработка навигации
+        document.addEventListener('DOMContentLoaded', function() {
+            const navTabs = document.querySelectorAll('.nav-tab');
+            navTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Удаляем класс active у всех вкладок
+                    navTabs.forEach(t => t.classList.remove('active'));
+                    // Добавляем класс active текущей вкладке
+                    this.classList.add('active');
+                    
+                    // Если это не текущая страница, переходим по ссылке
+                    const page = this.textContent.trim();
+                    
+                    switch(page) {
+                        case 'ГЛАВНАЯ':
+                            break;
+                        case 'ТЕОРЕТИЧЕСКИЙ РАЗДЕЛ':
+                            window.location.href = 'theory.html';
+                            break;
+                        case 'ПРАКТИЧЕСКИЙ РАЗДЕЛ':
+                            window.location.href = 'practice.html';
+                            break;
+                        case 'ДОПОЛНИТЕЛЬНЫЕ МАТЕРИАЛЫ':
+                            window.location.href = 'materials.html';
+                            break;
+                    }
+                });
+            });
+            
+            // Добавляем иконку Python в заголовок вкладки
+            document.title = "🐍 " + document.title;
+        });
+    </script>
+</body>
+</html>
